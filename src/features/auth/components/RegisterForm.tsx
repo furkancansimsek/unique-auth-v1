@@ -2,21 +2,10 @@
 
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
-import { FormField } from '@/components/molecules/FormField';
-import { Button } from '@/components/atoms/Button';
+import { FormField } from '@/shared/ui';
+import { Button } from '@/shared/ui';
 import { useState } from 'react';
-
-const registerSchema = z.object({
-  email: z.string().email('Invalid email address'),
-  password: z.string().min(8, 'Password must be at least 8 characters'),
-  confirmPassword: z.string(),
-}).refine((data) => data.password === data.confirmPassword, {
-  message: "Passwords don't match",
-  path: ['confirmPassword'],
-});
-
-type RegisterFormData = z.infer<typeof registerSchema>;
+import { registerSchema, type RegisterFormData } from '../schemas';
 
 export const RegisterForm = () => {
   const [isLoading, setIsLoading] = useState(false);

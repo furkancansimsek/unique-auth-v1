@@ -2,17 +2,10 @@
 
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
-import { FormField } from '@/components/molecules/FormField';
-import { Button } from '@/components/atoms/Button';
+import { FormField } from '@/shared/ui';
+import { Button } from '@/shared/ui';
 import { useState } from 'react';
-
-const loginSchema = z.object({
-  email: z.string().email('Invalid email address'),
-  password: z.string().min(1, 'Password is required'),
-});
-
-type LoginFormData = z.infer<typeof loginSchema>;
+import { loginSchema, type LoginFormData } from '../schemas';
 
 export const LoginForm = () => {
   const [isLoading, setIsLoading] = useState(false);
