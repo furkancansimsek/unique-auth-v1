@@ -6,6 +6,7 @@ import { FormField } from '@/shared/ui';
 import { Button } from '@/shared/ui';
 import { useState } from 'react';
 import { loginSchema, type LoginFormData } from '../schemas';
+import toast from 'react-hot-toast';
 
 export const LoginForm = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -21,9 +22,10 @@ export const LoginForm = () => {
     setIsLoading(true);
     try {
       await new Promise((resolve) => setTimeout(resolve, 1000));
-      alert('Login successful!');
+      toast.success('Login successful!');
     } catch (error) {
       console.error('Login failed:', error);
+      toast.error('Login failed. Please try again.');
     } finally {
       setIsLoading(false);
     }

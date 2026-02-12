@@ -6,6 +6,7 @@ import { FormField } from '@/shared/ui';
 import { Button } from '@/shared/ui';
 import { useState } from 'react';
 import { registerSchema, type RegisterFormData } from '../schemas';
+import toast from 'react-hot-toast';
 
 export const RegisterForm = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -21,9 +22,10 @@ export const RegisterForm = () => {
     setIsLoading(true);
     try {
       await new Promise((resolve) => setTimeout(resolve, 1000));
-      alert('Registration successful!');
+      toast.success('Registration successful!');
     } catch (error) {
       console.error('Registration failed:', error);
+      toast.error('Registration failed. Please try again.');
     } finally {
       setIsLoading(false);
     }
