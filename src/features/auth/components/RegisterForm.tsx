@@ -20,7 +20,6 @@ export const RegisterForm = () => {
   const onSubmit = async (data: RegisterFormData) => {
     setIsLoading(true);
     try {
-      console.log('Register data:', data);
       await new Promise((resolve) => setTimeout(resolve, 1000));
       alert('Registration successful!');
     } catch (error) {

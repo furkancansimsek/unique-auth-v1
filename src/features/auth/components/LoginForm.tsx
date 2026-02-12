@@ -20,7 +20,6 @@ export const LoginForm = () => {
   const onSubmit = async (data: LoginFormData) => {
     setIsLoading(true);
     try {
-      console.log('Login data:', data);
       await new Promise((resolve) => setTimeout(resolve, 1000));
       alert('Login successful!');
     } catch (error) {
