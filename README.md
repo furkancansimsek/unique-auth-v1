@@ -65,6 +65,23 @@ unique-auth-v1/
 
 ## Getting Started
 
+### Environment Setup
+
+Create a `.env.local` file in the root directory:
+
+```bash
+cp .env.example .env.local
+```
+
+Configure the following variables:
+
+```env
+NEXT_PUBLIC_API_URL=http://localhost:8080
+NEXT_PUBLIC_API_KEY=dev-key-change-in-production
+```
+
+**Important:** All API requests include the `Authorization: Bearer ${API_KEY}` header for authentication.
+
 ### Installation
 
 ```bash

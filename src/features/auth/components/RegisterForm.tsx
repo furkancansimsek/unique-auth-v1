@@ -7,6 +7,7 @@ import { Button } from '@/shared/ui';
 import { useState } from 'react';
 import { registerSchema, type RegisterFormData } from '../schemas';
 import toast from 'react-hot-toast';
+import { apiClient } from '@/lib/api/client';
 
 export const RegisterForm = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -21,11 +22,14 @@ export const RegisterForm = () => {
   const onSubmit = async (data: RegisterFormData) => {
     setIsLoading(true);
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      await apiClient.post('/auth/register', {
+        email: data.email,
+        password: data.password,
+      });
       toast.success('Registration successful!');
     } catch (error) {
       console.error('Registration failed:', error);
-      toast.error('Registration failed. Please try again.');
+      toast.error(error instanceof Error ? error.message : 'Registration failed. Please try again.');
     } finally {
       setIsLoading(false);
     }

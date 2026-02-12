@@ -7,6 +7,7 @@ import { Button } from '@/shared/ui';
 import { useState } from 'react';
 import { loginSchema, type LoginFormData } from '../schemas';
 import toast from 'react-hot-toast';
+import { apiClient } from '@/lib/api/client';
 
 export const LoginForm = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -21,11 +22,14 @@ export const LoginForm = () => {
   const onSubmit = async (data: LoginFormData) => {
     setIsLoading(true);
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      await apiClient.post('/auth/login', {
+        email: data.email,
+        password: data.password,
+      });
       toast.success('Login successful!');
     } catch (error) {
       console.error('Login failed:', error);
-      toast.error('Login failed. Please try again.');
+      toast.error(error instanceof Error ? error.message : 'Login failed. Please try again.');
     } finally {
       setIsLoading(false);
     }
